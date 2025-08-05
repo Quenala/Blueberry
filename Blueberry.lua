@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]]
 
 _addon.name = 'Blueberry'
-_addon.version = '1.1'
+_addon.version = '1.2'
 _addon.author = 'Quenala'
 _addon.commands = {'blueberry'}
 
@@ -47,6 +47,14 @@ windower.register_event('incoming text', function(original, modified, original_m
         galli_total = galli_total + tonumber(galli_gain)
 		blueberry_hud:text('Gallimaufry: '..galli_total)
     end
+end)
+
+windower.register_event('zone change', function(new_zone_id)
+	if new_zone_id == 133 then
+		galli_total = 0
+        windower.add_to_chat(207, '[Blueberry] Session total reset to 0.')
+		blueberry_hud:text(' ')
+	end
 end)
 
 windower.register_event('addon command', function(...)
